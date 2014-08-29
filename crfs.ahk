@@ -140,7 +140,7 @@ FSCheck:
 ; Works for IE, Chrome and helps prevent detection of any other window with the name Watch. If this fails it will fallback to detecting only by title. 
 SetTitleMatchMode, Slow
 ; Chrome changed its fullscreen flash window name making it harder to detect. Only detecting the fact that you are on a chrome window without Crunchyroll in the title.
-If WinExist("Adobe Flash Player") or WinActive("ahk_class Chrome_WidgetWin_1","","Crunchyroll -")
+If WinExist("Adobe Flash Player") or isChomeFS()
 {
 ;sleeping while you watch.
 sleep, 1000
@@ -174,3 +174,16 @@ return
 ;closes this app.
 F4::ExitApp
 ;The End.
+
+
+; full screen check for chrome function
+isChomeFS() {
+SetTitleMatchMode, Regex
+IfWinActive ,^[Crunchyroll - Watch|Crunchyroll -].*Chrome$
+{
+WinGetPos, Xpos, Ypos, Width, Height,
+if (Xpos = 0 && Ypos = 0 && Width = A_ScreenWidth && Height = A_ScreenHeight)
+return true
+}
+return false
+}
