@@ -157,14 +157,18 @@ IfWinExist ,^[Crunchyroll - Watch|Crunchyroll -].*[Mozilla Firefox|Chrome|Intern
 WinActivate,^[Crunchyroll - Watch|Crunchyroll -].*[Mozilla Firefox]|Chrome|Internet Explorer|Opera|Safari|]$, ;Activates window.
 }
 }
-ImageSearch, FoundX, FoundY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *75 crfs.bmp ;looking for the button.
+WinGetPos, CrX, CrY, CrWidth, CrHeight ; getting position of the window to reduce scan area.
+ImageSearch, FoundX, FoundY, CrX, CrY, CrWidth, CrHeight, *75 crfs.bmp ;looking for the button. 
 if ErrorLevel = 0
 {
 MouseClick, left, %FoundX%+10, %FoundY%+10 ; Click on the fullscreen button.
 sleep, 500
 MouseMove, 22, 22 ; Get the mouse out of the way.
-}
 Sleep, 1000 ; make sure we give the window enough time to go fullscreen before checking again.
+} else {
+MouseMove, CrWidth / 2 , CrHeight / 2 ; put the mouse in position to scroll down.
+mouseclick, wheeldown
+}
 }
 return
 ;stops the timer
