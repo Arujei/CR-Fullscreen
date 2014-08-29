@@ -5,8 +5,12 @@ Crunchyroll Fullscreen app and sleep/shutdown timer.
 
 Version Notes
 =============
-Version: 2.0 (Release: 28 March 2014)
+Version: 2.1 (Release: 28 August 2014)
 Notes:
+2.1
+Fixed the issue where it will click itself out of fullscreen in chrome.
+Added scroll down between failures of not finding the button to scroll the screen down for those smaller screens as a quick fix.
+Reduced area of detection to just the Crunchyroll browser window.
 2.0
 Replace looping with a timer.
 Replaced pausing the script with stopping and starting the timer.
